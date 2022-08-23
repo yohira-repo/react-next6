@@ -1,13 +1,23 @@
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { SecondaryButton } from "../atoms/buttom/SecondaryButton";
+import { useContext } from "react";
+import { UserContext } from "../../providers/Userprovider";
 
 export const Top = () => {
   const hostory = useHistory();
-  const onClickAdmin = () =>
-    hostory.push({ pathname: "/users", state: { isAdmin: true } });
-  const onClickGeneral = () =>
-    hostory.push({ pathname: "/users", state: { isAdmin: false } });
+  const { setUserInfo } = useContext(UserContext);
+
+  const onClickAdmin = () => {
+    setUserInfo({ isAdmin: true });
+    hostory.push("/users");
+  };
+
+  const onClickGeneral = () => {
+    setUserInfo({ isAdmin: false });
+    hostory.push("/users");
+  };
+
   return (
     <SContainer>
       <h2>TOPページです</h2>
